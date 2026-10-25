@@ -1,0 +1,16 @@
+{
+  "event_id": "ed80160d-2e04-507a-84d9-5164424cd6f9",
+  "event_type": "company.ai-preparation.failed",
+  "version": 1,
+  "occurred_at": "2026-10-21T21:03:00Z",
+  "request_id": "1936c699-9071-4f1c-95c6-24941ec91ad1",
+  "company_id": "73639047-734d-53e7-9753-8f70e9b7df25",
+  "role": "собственник бизнеса",
+  "context_version": "sha256:6e610242c5c4a96244d9b34fe0dc1d7f21c6b7d83a0e5c5532a177be19eb47ed",
+  "result": null,
+  "error": {
+    "code": "MODEL_TIMEOUT",
+    "message": "Не удалось завершить обработку за отведённое время",
+    "retryable": true
+  }
+}

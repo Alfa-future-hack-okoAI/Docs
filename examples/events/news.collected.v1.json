@@ -1,0 +1,19 @@
+{
+  "event_id": "00000000-0000-4000-8000-000000000010",
+  "event_type": "news.collected",
+  "version": 1,
+  "occurred_at": "2026-10-26T09:01:00Z",
+  "news": {
+    "id": "00000000-0000-4000-8000-000000000011",
+    "source": "interfax",
+    "external_id": "synthetic-docs-news-1",
+    "title": "Учебная новость для примера контракта",
+    "content": "Синтетический текст для документации. Это не реальная публикация.",
+    "url": "https://example.com/news/1",
+    "published_at": "2026-10-26T09:00:00Z",
+    "collected_at": "2026-10-26T09:01:00Z",
+    "rss_description": "Учебный пример",
+    "content_status": "full",
+    "content_error": null
+  }
+}
