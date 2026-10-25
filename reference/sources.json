@@ -1,0 +1,66 @@
+{
+  "verified_on": "2026-10-26",
+  "timezone": "Europe/Moscow",
+  "repositories": [
+    {
+      "repository": "Account-Service",
+      "revision": "71315241bbf9b28ffdc15f0ca33ca04de7b3d0c3",
+      "status": "production",
+      "url": "https://github.com/Alfa-future-hack-okoAI/Account-Service/tree/71315241bbf9b28ffdc15f0ca33ca04de7b3d0c3"
+    },
+    {
+      "repository": "Business-Impact-Service",
+      "revision": "afc14cc5b5448a07ee023b0b8f5385481e08ffaa",
+      "status": "production",
+      "url": "https://github.com/Alfa-future-hack-okoAI/Business-Impact-Service/tree/afc14cc5b5448a07ee023b0b8f5385481e08ffaa"
+    },
+    {
+      "repository": "News-Collector-Service",
+      "revision": "cd43f6904e7aece70a777c10d7a835a002e49e12",
+      "status": "production",
+      "url": "https://github.com/Alfa-future-hack-okoAI/News-Collector-Service/tree/cd43f6904e7aece70a777c10d7a835a002e49e12"
+    },
+    {
+      "repository": "ml",
+      "revision": "a49ff948dd64ce3298a94b6a0f65f5a17e595750",
+      "status": "production",
+      "url": "https://github.com/Alfa-future-hack-okoAI/ml/tree/a49ff948dd64ce3298a94b6a0f65f5a17e595750"
+    },
+    {
+      "repository": "Deployment",
+      "revision": "e32b30f1525eb686e028837b49bca8172c04933f",
+      "status": "production",
+      "url": "https://github.com/Alfa-future-hack-okoAI/Deployment/tree/e32b30f1525eb686e028837b49bca8172c04933f"
+    },
+    {
+      "repository": "API-Gateway",
+      "revision": "9c49289f45233f0aa47cf16a20a720dd9b72a72c",
+      "status": "source-only",
+      "url": "https://github.com/Alfa-future-hack-okoAI/API-Gateway/tree/9c49289f45233f0aa47cf16a20a720dd9b72a72c"
+    },
+    {
+      "repository": "Insight-Service",
+      "revision": "541337d23ff0cab3c1f7e84702c28723e093d921",
+      "status": "source-only",
+      "url": "https://github.com/Alfa-future-hack-okoAI/Insight-Service/tree/541337d23ff0cab3c1f7e84702c28723e093d921"
+    },
+    {
+      "repository": "ml",
+      "revision": "78619631103fc668a982c78e2a3ab540e2dd2c84",
+      "status": "production-core-baseline",
+      "url": "https://github.com/Alfa-future-hack-okoAI/ml/tree/78619631103fc668a982c78e2a3ab540e2dd2c84"
+    },
+    {
+      "repository": "ml",
+      "revision": "7d966a2fe3ece604da9d4b3645031f196abe9b3e",
+      "status": "polish-not-deployed",
+      "url": "https://github.com/Alfa-future-hack-okoAI/ml/tree/7d966a2fe3ece604da9d4b3645031f196abe9b3e"
+    },
+    {
+      "repository": "product",
+      "revision": "2b0efda81a0fcb35c72d25d0d7f0929cc0aeb889",
+      "status": "separate-demo-source",
+      "url": "https://github.com/Alfa-future-hack-okoAI/product/tree/2b0efda81a0fcb35c72d25d0d7f0929cc0aeb889"
+    }
+  ]
+}

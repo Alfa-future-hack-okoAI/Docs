@@ -1,0 +1,126 @@
+{
+  "$defs": {
+    "News": {
+      "additionalProperties": false,
+      "properties": {
+        "source": {
+          "maxLength": 100,
+          "minLength": 1,
+          "title": "Source",
+          "type": "string"
+        },
+        "external_id": {
+          "maxLength": 500,
+          "minLength": 1,
+          "title": "External Id",
+          "type": "string"
+        },
+        "title": {
+          "maxLength": 1000,
+          "minLength": 1,
+          "title": "Title",
+          "type": "string"
+        },
+        "content": {
+          "title": "Content",
+          "type": "string"
+        },
+        "url": {
+          "format": "uri",
+          "maxLength": 2083,
+          "minLength": 1,
+          "title": "Url",
+          "type": "string"
+        },
+        "published_at": {
+          "format": "date-time",
+          "title": "Published At",
+          "type": "string"
+        },
+        "rss_description": {
+          "default": "",
+          "title": "Rss Description",
+          "type": "string"
+        },
+        "content_status": {
+          "default": "unknown",
+          "enum": [
+            "full",
+            "rss_only",
+            "unavailable",
+            "unknown"
+          ],
+          "title": "Content Status",
+          "type": "string"
+        },
+        "content_error": {
+          "anyOf": [
+            {
+              "maxLength": 100,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Content Error"
+        },
+        "id": {
+          "format": "uuid",
+          "title": "Id",
+          "type": "string"
+        },
+        "collected_at": {
+          "format": "date-time",
+          "title": "Collected At",
+          "type": "string"
+        }
+      },
+      "required": [
+        "source",
+        "external_id",
+        "title",
+        "content",
+        "url",
+        "published_at"
+      ],
+      "title": "News",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "event_id": {
+      "format": "uuid",
+      "title": "Event Id",
+      "type": "string"
+    },
+    "event_type": {
+      "const": "news.collected",
+      "default": "news.collected",
+      "title": "Event Type",
+      "type": "string"
+    },
+    "version": {
+      "const": 1,
+      "default": 1,
+      "title": "Version",
+      "type": "integer"
+    },
+    "occurred_at": {
+      "format": "date-time",
+      "title": "Occurred At",
+      "type": "string"
+    },
+    "news": {
+      "$ref": "#/$defs/News"
+    }
+  },
+  "required": [
+    "news"
+  ],
+  "title": "NewsCollected",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}
