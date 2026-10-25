@@ -64,7 +64,7 @@ Content-Type: application/json
 - Reanalyze меняет ML, но не синхронизирует новую карточку обратно в BI.
   BI revision остаётся прежней; последующий запрос может получить 409 stale reference.
 - Адаптер рассчитан на UUID-ветку ML dev, не на смену company_id в polish.
-- Отдельного Insight `/summary` или `/companies/{id}/analysis` в этом снимке нет.
+- Отдельного Insight `/summary` в этом снимке нет.
 
 Локально сервис слушает 8082; Compose поднимает собственный PostgreSQL.
 `/healthz` проверяет процесс; `/readyz` — PostgreSQL и bounded-пробы BI/ML.

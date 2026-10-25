@@ -92,9 +92,11 @@ Deployment `scripts/configure_ml.py`, который сохраняет суще
 5. Проверить пользовательский запрос с JWT и, для нового потока, фактическое
    заполнение BI. Healthy контейнер не доказывает успешный импорт задания.
 
-26.10.2026 проверен релиз BI `afc14cc`, Deployment `e32b30f`: endpoint последнего
-анализа возвращает 200 для сохранённого результата, карточки доступны, отсутствие
-JWT даёт 401, чужая компания — 403. ML остался на прежнем digest dev-логики.
+26.10.2026 проверен релиз BI `c8c01a3`, Deployment `b7bd515`: удалённый
+`GET /v1/companies/{company_id}/analysis` возвращает 404 и отсутствует в Swagger.
+Лента, сводка, полный результат по request_id и отдельные карточки доступны;
+отсутствие JWT при чтении ленты даёт 401, чужая компания — 403.
+ML остался на прежнем digest dev-логики.
 
 ## Сбой и возврат версии
 
@@ -106,4 +108,4 @@ current меняется после успешной выкладки. Если 
 Go Gateway/Insight пока не имеют интеграции с этим пайплайном Deployment.
 Сценарий product/up.sh описан отдельно в [окружениях](environments.md).
 
-Каноническая инструкция и scripts: [Deployment](https://github.com/Alfa-future-hack-okoAI/Deployment/tree/e32b30f1525eb686e028837b49bca8172c04933f).
+Каноническая инструкция и scripts: [Deployment](https://github.com/Alfa-future-hack-okoAI/Deployment/tree/b7bd515c3c68684c8c03c6a0b1aa0687a81d3cbc).

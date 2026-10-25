@@ -36,7 +36,6 @@
 | `GET` | `/v1/news/{news_id}` | Полная новость, включая sentences |
 | `GET` | `/v1/cards/{card_id}` | Полная карточка влияния на компанию |
 | `GET` | `/v1/analyses/{request_id}` | Полный итог задания ML |
-| `GET` | `/v1/companies/{company_id}/analysis` | Последний полный анализ компании |
 | `GET` | `/v1/companies/{company_id}/contexts/{context_version}` | Исходный снимок Account-Service |
 | `GET` | `/v1/feed` | Новости компании, включая новости без карточки |
 | `GET` | `/v1/summary` | Счётчики и до десяти подробных карточек |

@@ -9,7 +9,7 @@
 |---|---|
 | Лента новостей компании | `GET /v1/feed?company_id=UUID&period=7d` |
 | Сводка и важные карточки | `GET /v1/summary?company_id=UUID&period=7d` |
-| Полный последний пакет компании | `GET /v1/companies/UUID/analysis` |
+| Полный пакет одного задания | `GET /v1/analyses/REQUEST_UUID` |
 | Карточка отдельно | `GET /v1/cards/CARD_ID` |
 | Исходная обработанная новость | `GET /v1/news/NEWS_UUID` |
 
@@ -86,9 +86,11 @@ const news = response.items.map(item => ({
 `items[].highlight` может быть `null`; UI должен уметь использовать `card`.
 
 Если нужен исходный сохранённый объект ML, прочитайте
-`GET /v1/companies/{company_id}/analysis` и поле `ml_summary`.
-Оно содержит `calculatedAt`, `company`, `counters`, `highlights`, но относится
-к снимку импорта. Отдельной компактной BI-ручки только для `ml_summary` нет.
+`GET /v1/analyses/{request_id}` и поле `ml_summary`.
+Поле `ml_summary` содержит `calculatedAt`, `company`, `counters`, `highlights`,
+но относится к снимку импорта. ID задания возьмите из `analysis.request_id`
+в ответе feed или summary. Если `analysis=null`, сохранённого результата
+для выбранного пользователя и роли ещё нет. Отдельной компактной BI-ручки только для `ml_summary` нет.
 Счётчики BI и ML нельзя автоматически считать одинаковыми: ML totalEvents
 считает свои статьи периода, BI — новости выбранной выдачи компании.
 

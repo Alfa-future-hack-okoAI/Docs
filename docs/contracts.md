@@ -22,7 +22,7 @@ Bind на exchange создаёт отдельный поток для кажд�
 
 Account queues — durable/quorum, dead-letter exchange `account-service.ai.failed`.
 BI имеет отдельные `.retry` и `.dead` очереди. Точные имена/аргументы задаются
-конфигурацией и [topology BI](https://github.com/Alfa-future-hack-okoAI/Business-Impact-Service/blob/afc14cc5b5448a07ee023b0b8f5385481e08ffaa/src/modules/impacts/infrastructure/broker/topology.py).
+конфигурацией и [topology BI](https://github.com/Alfa-future-hack-okoAI/Business-Impact-Service/blob/c8c01a3bb069eb2f89691822c1116ccfd4b92f34/src/modules/impacts/infrastructure/broker/topology.py).
 Дополнительные legacy-binding `ml.results` не означают, что текущий ML
 публикует `company.analysis.finished.v1` или processed v2: нативный путь — v1 ниже.
 
