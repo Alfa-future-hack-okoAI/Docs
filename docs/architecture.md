@@ -58,8 +58,8 @@ sequenceDiagram
     Q->>B: Сохранить уведомление
     B->>M: GET result, feed, summary, context, cards, news
     B->>B: Проверить идентичность и сохранить снимок
-    U->>B: GET /v1/companies/UUID/analysis
-    B-->>U: Последний сохранённый анализ пользователя и роли
+    U->>B: GET /v1/feed и /v1/summary с company_id=UUID
+    B-->>U: Новости, карточки и сводка пользователя и роли
 ```
 
 `ready` в Account означает завершение ML. Готовность BI проверяется отдельно:

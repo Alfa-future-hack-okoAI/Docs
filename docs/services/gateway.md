@@ -55,5 +55,5 @@ Host-network Compose рассчитан на Linux; на Mac удобнее Go-�
 обслуживает News/ML и TLS. Текущие правила Caddy не следует удалять только
 потому, что существует репозиторий Go Gateway.
 
-Источники: [Caddy Deployment](https://github.com/Alfa-future-hack-okoAI/Deployment/blob/e32b30f1525eb686e028837b49bca8172c04933f/gateway/Caddyfile),
+Источники: [Caddy Deployment](https://github.com/Alfa-future-hack-okoAI/Deployment/blob/b7bd515c3c68684c8c03c6a0b1aa0687a81d3cbc/gateway/Caddyfile),
 [Go Gateway](https://github.com/Alfa-future-hack-okoAI/API-Gateway/tree/9c49289f45233f0aa47cf16a20a720dd9b72a72c).

@@ -10,9 +10,9 @@
     },
     {
       "repository": "Business-Impact-Service",
-      "revision": "afc14cc5b5448a07ee023b0b8f5385481e08ffaa",
+      "revision": "c8c01a3bb069eb2f89691822c1116ccfd4b92f34",
       "status": "production",
-      "url": "https://github.com/Alfa-future-hack-okoAI/Business-Impact-Service/tree/afc14cc5b5448a07ee023b0b8f5385481e08ffaa"
+      "url": "https://github.com/Alfa-future-hack-okoAI/Business-Impact-Service/tree/c8c01a3bb069eb2f89691822c1116ccfd4b92f34"
     },
     {
       "repository": "News-Collector-Service",
@@ -28,9 +28,9 @@
     },
     {
       "repository": "Deployment",
-      "revision": "e32b30f1525eb686e028837b49bca8172c04933f",
+      "revision": "b7bd515c3c68684c8c03c6a0b1aa0687a81d3cbc",
       "status": "production",
-      "url": "https://github.com/Alfa-future-hack-okoAI/Deployment/tree/e32b30f1525eb686e028837b49bca8172c04933f"
+      "url": "https://github.com/Alfa-future-hack-okoAI/Deployment/tree/b7bd515c3c68684c8c03c6a0b1aa0687a81d3cbc"
     },
     {
       "repository": "API-Gateway",
