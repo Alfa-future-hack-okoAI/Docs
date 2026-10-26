@@ -125,4 +125,4 @@ PDF хранится в MinIO, в PostgreSQL — его метаданные, х
 описанный поток подготовки передаёт структурированный контекст.
 
 Источники: [код и API Account](https://github.com/Alfa-future-hack-okoAI/Account-Service/tree/9e14c05f6bf2a4d82285fa73721d23fbdc5303a2),
-[контракты](../contracts.md), [авторизация](../security.md).
+[контракты](../contracts.md).

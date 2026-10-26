@@ -78,7 +78,7 @@ BI сверяет компанию, роль, контекст, result_id и в�
 
 При JWT проверяются подпись/claims и текущий доступ через Account. Внутренний
 Service-Key предназначен для доверенного server-to-server канала; Caddy его
-удаляет на внешнем входе. [Подробнее](../security.md).
+удаляет на внешнем входе.
 
 Источники: [BI](https://github.com/Alfa-future-hack-okoAI/Business-Impact-Service/tree/c8c01a3bb069eb2f89691822c1116ccfd4b92f34),
 [структура интерфейса](../frontend.md), [диагностика](../operations.md).
