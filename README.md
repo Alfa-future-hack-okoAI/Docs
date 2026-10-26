@@ -11,8 +11,8 @@
 - API-Gateway (`main`) — [bb692a3991b51184954fb8bc5fb543becdc6ed70](https://github.com/Alfa-future-hack-okoAI/API-Gateway/commit/bb692a3991b51184954fb8bc5fb543becdc6ed70)
 - Deployment (`main`) — [207735ab83aa5b464494a213d76d7ec5a352d20a](https://github.com/Alfa-future-hack-okoAI/Deployment/commit/207735ab83aa5b464494a213d76d7ec5a352d20a)
 - Product (`polish`) — [9609d42e7295060d6e8432bd83416a563fd354bd](https://github.com/Alfa-future-hack-okoAI/product/commit/9609d42e7295060d6e8432bd83416a563fd354bd)
-- frontend (`dev`) — [839a40b3db31316ac682596d6fcfc592df3a9add](https://github.com/Alfa-future-hack-okoAI/frontend/commit/839a40b3db31316ac682596d6fcfc592df3a9add)
-- Docs (`main`, до обновления списка) — [ee708c147eeea78d215c7e1f423b62586b235d2f](https://github.com/Alfa-future-hack-okoAI/Docs/commit/ee708c147eeea78d215c7e1f423b62586b235d2f)
+- frontend (`dev`) — [bc739ddab55e737513e55d9f1e203631920a63b2](https://github.com/Alfa-future-hack-okoAI/frontend/commit/bc739ddab55e737513e55d9f1e203631920a63b2)
+- Docs (`main`, до обновления списка) — [b75a188bff834abd3f281149c33c2404952d6ae1](https://github.com/Alfa-future-hack-okoAI/Docs/commit/b75a188bff834abd3f281149c33c2404952d6ae1)
 
 Все репозитории, кроме Docs закрыты, мы пригласили эксперта для проверки остальных репозиториев. 
 Проект развернут на сервере, просьба предоставить доступ к ключу на время проверки. 
