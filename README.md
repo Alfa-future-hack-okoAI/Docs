@@ -2,16 +2,17 @@
 Команда - 'око эйай'
 
 Контрольные коммиты:
-Account-Service – 
-News-Collector-Service – 
-Business-Impact-Service –
-ml – 
-Insight-Service – 
-API-Gateway – 
-Deployment – 
-Product – 
-frontend –
-Docs – 
+
+- Account-Service —
+- News-Collector-Service —
+- Business-Impact-Service —
+- ml —
+- Insight-Service —
+- API-Gateway —
+- Deployment —
+- Product —
+- frontend —
+- Docs —
 
 ## С чего начать
 
