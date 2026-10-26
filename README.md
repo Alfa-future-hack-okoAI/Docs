@@ -3,16 +3,16 @@
 
 Контрольные коммиты:
 
-- Account-Service —
-- News-Collector-Service —
-- Business-Impact-Service —
-- ml —
-- Insight-Service —
-- API-Gateway —
-- Deployment —
+- Account-Service — [fd870fbc5d4801f0a264da47121a8c9589f8a8d3](https://github.com/Alfa-future-hack-okoAI/Account-Service/commit/fd870fbc5d4801f0a264da47121a8c9589f8a8d3)
+- News-Collector-Service — [cd43f6904e7aece70a777c10d7a835a002e49e12](https://github.com/Alfa-future-hack-okoAI/News-Collector-Service/commit/cd43f6904e7aece70a777c10d7a835a002e49e12)
+- Business-Impact-Service — [34d1b00583cfc2695bca7408a5185bb5f47b5fc4](https://github.com/Alfa-future-hack-okoAI/Business-Impact-Service/commit/34d1b00583cfc2695bca7408a5185bb5f47b5fc4)
+- ml — [55904cea8c1d209668215d07b24a60fb245dbbae](https://github.com/Alfa-future-hack-okoAI/ml/commit/55904cea8c1d209668215d07b24a60fb245dbbae)
+- Insight-Service — [77a4ac49efbc12478c7304e03d5fa72f7d13301d](https://github.com/Alfa-future-hack-okoAI/Insight-Service/commit/77a4ac49efbc12478c7304e03d5fa72f7d13301d)
+- API-Gateway — [bb692a3991b51184954fb8bc5fb543becdc6ed70](https://github.com/Alfa-future-hack-okoAI/API-Gateway/commit/bb692a3991b51184954fb8bc5fb543becdc6ed70)
+- Deployment — [b0ff449673f665954754deaad46955f0e1363347](https://github.com/Alfa-future-hack-okoAI/Deployment/commit/b0ff449673f665954754deaad46955f0e1363347)
 - Product —
 - frontend —
-- Docs —
+- Docs — [73032531aceea7bafbbcbedd49cc9d4371808600](https://github.com/Alfa-future-hack-okoAI/Docs/commit/73032531aceea7bafbbcbedd49cc9d4371808600)
 
 Все репозитории, кроме Docs закрыты, мы пригласили эксперта для проверки остальных репозиториев. 
 Проект развернут на сервере, просьба предоставить доступ к ключу на время проверки. 
