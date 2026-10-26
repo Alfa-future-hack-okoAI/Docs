@@ -1,10 +1,23 @@
 # ОкоAI — документация проекта
-Команда «око эйай».
+Команда - 'око эйай'
 
-ОкоAI связывает новости с бизнес-контекстом компании и показывает риски,
-возможности, источники и рекомендуемые действия.
+Контрольные коммиты:
 
-Исходники сервисов доступны в закрытых репозиториях по приглашению.
+- Account-Service —
+- News-Collector-Service —
+- Business-Impact-Service —
+- ml —
+- Insight-Service —
+- API-Gateway —
+- Deployment —
+- Product —
+- frontend —
+- Docs —
+
+Все репозитории, кроме Docs закрыты, мы пригласили эксперта для проверки остальных репозиториев. 
+Проект развернут на сервере, просьба предоставить доступ к ключу на время проверки. 
+Демосборка для демонстрации работы находиться в Product
+
 
 ## С чего начать
 
@@ -33,7 +46,7 @@
 | [Business-Impact-Service](https://github.com/Alfa-future-hack-okoAI/Business-Impact-Service) | Импорт и хранение готовых данных ML, API аналитики | [BI](docs/services/business-impact.md) |
 | [Insight-Service](https://github.com/Alfa-future-hack-okoAI/Insight-Service) | Авторизованный адаптер чата/перерасчёта, история диалогов | [Insight](docs/services/insight.md) |
 | [API-Gateway](https://github.com/Alfa-future-hack-okoAI/API-Gateway) | Go reverse proxy для Account, BI и Insight | [Gateway](docs/services/gateway.md) |
-| [frontend](https://github.com/Alfa-future-hack-okoAI/frontend), [product](https://github.com/Alfa-future-hack-okoAI/product) | Интерфейс и отдельная интеграционная демосборка | [Два сценария фронтенда](docs/frontend.md) |
+| [frontend](https://github.com/Alfa-future-hack-okoAI/frontend), [product](https://github.com/Alfa-future-hack-okoAI/product) | Интерфейс и отдельная демосборка для демонстрации работы | [Два сценария фронтенда](docs/frontend.md) |
 | [Deployment](https://github.com/Alfa-future-hack-okoAI/Deployment) | Compose, Caddy, версии образов, выкладка Cloud.ru | [CI/CD](docs/deployment.md) |
 
 ## Работающий серверный стенд
