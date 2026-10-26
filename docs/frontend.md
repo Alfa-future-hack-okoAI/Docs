@@ -132,6 +132,6 @@ product форматирует только `publishedAt` и даты `sameEvent
 Прямое присоединение этого UI к BI требует адаптера данных и маршрутов.
 BI не реализует product-ручки pin/hide/feedback и не передаёт их в ML.
 
-Источники: [frontend handoff](https://github.com/Alfa-future-hack-okoAI/API-Gateway/blob/main/FRONTEND_HANDOFF.md),
+Источники: [frontend handoff](https://github.com/Alfa-future-hack-okoAI/API-Gateway/blob/main/docs/frontend.md),
 [ML HTTP API](https://github.com/Alfa-future-hack-okoAI/ml/blob/7d966a2fe3ece604da9d4b3645031f196abe9b3e/alfa_ml/api.py),
-[схема BI](../reference/business-impact-openapi.json).
+[Swagger BI](https://api.alfa-future-hack-okoai.ru/api/business-impact-service/docs).

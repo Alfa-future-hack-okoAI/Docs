@@ -50,4 +50,4 @@ Outbox может повторно опубликовать событие пр�
 published_at, поэтому consumer должен учитывать event_id.
 
 Источники: [код News](https://github.com/Alfa-future-hack-okoAI/News-Collector-Service/tree/cd43f6904e7aece70a777c10d7a835a002e49e12),
-[OpenAPI](../../reference/news-collector-openapi.json).
+[Swagger News-Collector](https://api.alfa-future-hack-okoai.ru/api/news-collector-service/docs).

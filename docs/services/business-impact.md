@@ -33,7 +33,7 @@ BI — хранилище готовых новостей, контекстов,
 | `GET /v1/companies/{company_id}/contexts/{context_version}` | Точный снимок для объяснения старой карточки |
 
 Для article/card `revision=N` выбирает точную ревизию BI; без него — последнюю.
-Полные схемы — [OpenAPI](../../reference/business-impact-openapi.json).
+Полные схемы — [Swagger BI](https://api.alfa-future-hack-okoai.ru/api/business-impact-service/docs).
 Передача `company_id=U_*` вместо UUID даст ошибку валидации.
 
 ## Последний анализ и история

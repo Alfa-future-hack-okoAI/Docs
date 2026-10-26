@@ -48,7 +48,7 @@ CSV остаются источником демонстрационных/ре�
 сценарий запускает подготовку через Account/RabbitMQ.
 
 Для product предусмотрены camelCase-алиасы `/api/news/feed`, `/api/news/summary`,
-`/api/ai/chat` и POST `/api/news/summary/regenerate`. Полный [справочник API](../../reference/http-api.md).
+`/api/ai/chat` и POST `/api/news/summary/regenerate`. Полный [справочник API](../api.md).
 Их prefix за Cloud.ru Caddy начинается с `/api/ml-service`.
 
 ## Ранг
@@ -69,9 +69,8 @@ CSV остаются источником демонстрационных/ре�
 - повтор одинакового чата ждёт уже запущенный расчёт.
 
 Текущий HTTP-клиент BI проверяет UUID и отклонит результат polish с `U_*`.
-Это проверено изолированным вызовом реальных API обеих веток: dev импортируется,
-polish даёт `ML result company_id mismatch`. Сначала нужен адаптер идентичности
-BI, а также проверка истории card_id и контекста. Одного изменения Docker-тега
+Для перехода нужен адаптер идентичности BI, а также согласование
+истории card_id и контекста. Одного изменения Docker-тега
 для перехода недостаточно.
 
 Источники: [deployed ML](https://github.com/Alfa-future-hack-okoAI/ml/tree/a49ff948dd64ce3298a94b6a0f65f5a17e595750),

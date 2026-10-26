@@ -109,5 +109,4 @@ Go Gateway и Insight имеют свою структуру пакетов и �
 карточек, а не одну карточку на весь бизнес.
 
 Источники: [Account architecture](https://github.com/Alfa-future-hack-okoAI/Account-Service/blob/main/ARCHITECTURE.md),
-[BI architecture](https://github.com/Alfa-future-hack-okoAI/Business-Impact-Service/blob/main/ARCHITECTURE.md),
-[версии проверки](../reference/sources.json).
+[BI architecture](https://github.com/Alfa-future-hack-okoAI/Business-Impact-Service/blob/main/ARCHITECTURE.md).

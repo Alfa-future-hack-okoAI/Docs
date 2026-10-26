@@ -1,8 +1,8 @@
 # Insight-Service
 
 **Статус:** Go-сервис реализован в репозитории, но не подключён к текущему
-Cloud.ru Deployment и публичному Caddy. Ниже — действующий контракт кода,
-а не обещание доступности `/api/insight-service` на серверном домене.
+Cloud.ru Deployment и публичному Caddy. Инструкция запуска —
+в [локальной разработке](../local-development.md).
 
 Insight предоставляет авторизованное чтение BI, адаптер ML-чата/перерасчёта и
 устойчивую историю разговоров в собственной PostgreSQL.
@@ -51,7 +51,7 @@ Content-Type: application/json
 
 При переданном `conversation_id` реплика добавляется в собственный разговор;
 без него создаётся новый. Ответ дополняется `conversation_id` и `provenance`.
-Обязательные поля и пагинация — [OpenAPI из кода](../../reference/insight-openapi.json).
+Обязательные поля и пагинация — [Контракт Insight](https://github.com/Alfa-future-hack-okoAI/Insight-Service/blob/main/docs/api.md).
 
 ## Что важно для интеграции
 
@@ -64,7 +64,7 @@ Content-Type: application/json
 - Reanalyze меняет ML, но не синхронизирует новую карточку обратно в BI.
   BI revision остаётся прежней; последующий запрос может получить 409 stale reference.
 - Адаптер рассчитан на UUID-ветку ML dev, не на смену company_id в polish.
-- Отдельного Insight `/summary` в этом снимке нет.
+- Сводка читается непосредственно из BI через `/v1/summary`.
 
 Локально сервис слушает 8082; Compose поднимает собственный PostgreSQL.
 `/healthz` проверяет процесс; `/readyz` — PostgreSQL и bounded-пробы BI/ML.

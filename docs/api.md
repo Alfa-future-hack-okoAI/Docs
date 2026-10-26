@@ -1,12 +1,12 @@
 # Справочник HTTP API
 
-Снимки Account, BI, News и ML получены с серверного стенда 26.10.2026. Insight извлечён из исходного кода и пока не развёрнут в Cloud.ru.
-
-Полные схемы описывают тела, обязательные поля и типы. Таблицы ниже — индекс, а не замена схемам.
+В таблицах перечислены методы, пути и назначение запросов. Тела запросов,
+типы полей и примеры ответов доступны в Swagger соответствующего сервиса.
+Insight реализован в коде, но пока не подключён к серверному стенду.
 
 ## Account Service
 
-Внешний префикс: `/api/account-service`. [OpenAPI JSON](account-openapi.json).
+Внешний префикс: `/api/account-service`. [Swagger Account](https://api.alfa-future-hack-okoai.ru/api/account-service/docs).
 
 | Метод | Путь внутри сервиса | Назначение |
 |---|---|---|
@@ -29,7 +29,7 @@
 
 ## Business-Impact-Service
 
-Внешний префикс: `/api/business-impact-service`. [OpenAPI JSON](business-impact-openapi.json).
+Внешний префикс: `/api/business-impact-service`. [Swagger BI](https://api.alfa-future-hack-okoai.ru/api/business-impact-service/docs).
 
 | Метод | Путь внутри сервиса | Назначение |
 |---|---|---|
@@ -48,7 +48,7 @@
 
 ## News-Collector-Service
 
-Внешний префикс: `/api/news-collector-service`. [OpenAPI JSON](news-collector-openapi.json).
+Внешний префикс: `/api/news-collector-service`. [Swagger News-Collector](https://api.alfa-future-hack-okoai.ru/api/news-collector-service/docs).
 
 | Метод | Путь внутри сервиса | Назначение |
 |---|---|---|
@@ -56,7 +56,7 @@
 
 ## Альфа Око — ML-сервис
 
-Внешний префикс: `/api/ml-service`. [OpenAPI JSON](ml-openapi.json).
+Внешний префикс: `/api/ml-service`. [Swagger ML](https://api.alfa-future-hack-okoai.ru/api/ml-service/docs).
 
 | Метод | Путь внутри сервиса | Назначение |
 |---|---|---|
@@ -94,7 +94,7 @@
 
 ## Insight-Service
 
-Внешний префикс: `/api/insight-service`. [OpenAPI JSON](insight-openapi.json).
+Внешний префикс: `/api/insight-service`. [Контракт Insight](https://github.com/Alfa-future-hack-okoAI/Insight-Service/blob/main/docs/api.md).
 
 | Метод | Путь внутри сервиса | Назначение |
 |---|---|---|

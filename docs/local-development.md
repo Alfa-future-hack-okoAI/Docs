@@ -91,7 +91,7 @@ Insight Compose поднимает собственный PostgreSQL и серв
 
 Go Gateway требует ACCOUNT_URL, BUSINESS_IMPACT_URL, INSIGHT_URL.
 Его Compose использует host network и рассчитан на Linux. На Mac можно запустить
-`go run .` с upstream `http://localhost:18400`, `http://localhost:18500`,
+`go run ./cmd/api-gateway` с upstream `http://localhost:18400`, `http://localhost:18500`,
 `http://localhost:8082`, либо явно настроить Docker-сеть и адреса.
 
 Не подключайте Go Gateway к отсутствующему Insight и не считайте 503 readiness

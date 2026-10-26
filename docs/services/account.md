@@ -28,7 +28,7 @@ OpenAPI показывает короткие `paths` и этот префикс
 | `GET /companies/{company_id}/documents/{document_type}/{year}` | Скачать PDF |
 | `GET /companies/{company_id}/documents` | Список документов |
 
-Полные тела, типы, обязательные поля и ограничения — [OpenAPI](../../reference/account-openapi.json).
+Полные тела, типы, обязательные поля и ограничения — [Swagger Account](https://api.alfa-future-hack-okoai.ru/api/account-service/docs).
 `/health`, `/ready` и документация — отдельные служебные пути приложения;
 в опубликованный прикладной OpenAPI включены не все служебные операции.
 

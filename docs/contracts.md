@@ -32,9 +32,6 @@ Producer: News-Collector. Routing key: `news.collected.v1`.
 Envelope: `event_id`, `event_type="news.collected"`, `version=1`, `occurred_at`, `news`.
 В news — UUID, source/external_id, title/content/url, даты, качество загрузки.
 
-- [Полная схема](../reference/events/news.collected.v1.schema.json).
-- [Полный синтетический пример](../examples/events/news.collected.v1.json).
-
 event_id идентифицирует доставку события, news.id — публикацию. Не заменяйте
 их строкой URL. Стабильность исходной публикации определяется source/external_id.
 
@@ -69,9 +66,6 @@ Producer: Account. Routing key: `company.ai-preparation.requested.v1`.
 Нельзя менять context после вычисления hash, добавлять к нему роль или
 переименовывать поля перед сохранением исходного снимка.
 
-- [JSON Schema](../reference/events/company.ai-preparation.requested.v1.schema.json).
-- [Полный валидный пример с ML-агрегатами](../examples/events/company.ai-preparation.requested.v1.json).
-
 ## 3. Завершение подготовки
 
 Producer: ML. Routing keys: `company.ai-preparation.completed.v1` и
@@ -98,15 +92,6 @@ role, context_version. event_id уведомления отличается от
 Это фрагмент envelope. Полных новостей и карточек в completed нет.
 При failed: `result=null`, `error={code, message, retryable}`.
 
-- [Схема finished](../reference/events/company.ai-preparation.finished.v1.schema.json).
-- [Полный completed](../examples/events/company.ai-preparation.completed.v1.json).
-- [Полный failed](../examples/events/company.ai-preparation.failed.v1.json).
-- [HTTP-модель статуса Account](../reference/events/ai-preparation-status.v1.schema.json).
-
-В примерах completed и failed ID/роль/хеш согласованы с примером requested.
-Это альтернативные исходы одного учебного задания; публиковать оба результата
-для одного request_id нельзя.
-
 AMQP для Account-потока: persistent JSON UTF-8, message_id=event_id,
 correlation_id=request_id; type — CompanyAiPreparationRequested/Completed/Failed.
 Согласуйте транспортные metadata с body: Account/BI могут отклонить противоречие.
@@ -120,9 +105,6 @@ article содержит summary, importance, классификацию, templa
 `cards` — **массив строковых ID**, а не полных объектов. При AUTO_CARDS=0 он
 обычно пуст; карточки по команде Account получаются другим потоком.
 
-- [Схема приёмника BI](../reference/events/news.article.processed.v1.schema.json).
-- [Полный пример](../examples/events/news.article.processed.v1.json).
-
 ## 5. Как BI забирает полные данные
 
 После requested и completed BI читает:
@@ -135,10 +117,10 @@ article содержит summary, importance, классификацию, templa
 
 BI проверяет result_id/company_id/role/context_version/news_revision/pipeline_version,
 связи card↔news и актуальность контекста. Raw HTTP-ответы сохраняются вместе с
-нормализованными данными. Это snapshot момента импорта, а не обещание атомарного
-исторического состояния ML на секунду завершения генерации.
+нормализованными данными. BI сохраняет состояние объектов на момент импорта;
+при параллельном обновлении ML версии объектов могут различаться.
 
-## Надёжность и эволюция
+## Повторная доставка и совместимость
 
 - У News и Account outbox допускает повтор доставки; consumer дедуплицирует event_id.
 - BI ждёт обе части команды/результата в любом порядке; результат не связывается
@@ -149,5 +131,9 @@ BI проверяет result_id/company_id/role/context_version/news_revision/pi
   «сообщение исчезло из очереди» не доказывает, что BI получил статью.
 - `polish` меняет company_id в HTTP на U_*, но не в finished. Схема envelope v1
   при этом совместима, а текущий HTTP-import BI — нет.
-- Примеры `company.analysis.finished.v1` и processed v2 в старых документах BI
-  относятся к прежнему предлагаемому контракту, не к публикациям текущего ML.
+
+## Где найти точные контракты
+
+- [События Account-Service](https://github.com/Alfa-future-hack-okoAI/Account-Service/tree/main/contracts).
+- [Контракты и примеры BI](https://github.com/Alfa-future-hack-okoAI/Business-Impact-Service/tree/main/contracts).
+- [Интеграция ML](https://github.com/Alfa-future-hack-okoAI/ml/blob/dev/docs/INTEGRATION.md).
