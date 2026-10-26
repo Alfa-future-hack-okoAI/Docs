@@ -202,7 +202,7 @@
           "companies"
         ],
         "summary": "Компании, доступные текущему пользователю",
-        "description": "Возвращает компании пользователя и его роль в каждой из них. Поддерживает пагинацию.",
+        "description": "Возвращает компании пользователя из файлов и добавленные им компании Чекко, с ролью, источником, ИНН и признаком доступности аналитики. Поддерживает пагинацию.",
         "operationId": "list_companies_api_account_service_companies_get",
         "security": [
           {
@@ -246,6 +246,61 @@
                 }
               }
             }
+          },
+          "422": {
+            "description": "Ошибка проверки параметров запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "companies"
+        ],
+        "summary": "Добавить компанию по ИНН из Чекко",
+        "description": "Загружает реквизиты и последнюю доступную отчётность Чекко, сохраняет компанию в БД и добавляет её текущему пользователю. Компании из файлов сохраняются отдельно. Повторное добавление того же ИНН своим пользователем возвращает 409. Аналитика ML для такой компании недоступна.",
+        "operationId": "create_company_handler_api_account_service_companies_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCompanyDTO"
+              }
+            }
+          },
+          "description": "Данные запроса"
+        },
+        "responses": {
+          "201": {
+            "description": "Успешный ответ",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CompanyForUser"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Компания уже добавлена"
+          },
+          "502": {
+            "description": "Ошибка ответа или доступа Чекко"
+          },
+          "503": {
+            "description": "Чекко не настроен или временно недоступен"
           },
           "422": {
             "description": "Ошибка проверки параметров запроса",
@@ -752,7 +807,7 @@
           "ai-preparations"
         ],
         "summary": "Запросить подготовку сводки и инсайтов после выбора компании",
-        "description": "Создаёт задание и событие для доставки в ML-Service через RabbitMQ. Роль пользователя и снимок контекста определяются на сервере. Повтор с тем же заголовком Idempotency-Key возвращает ранее созданное задание.",
+        "description": "Создаёт задание и событие для доставки в ML-Service через RabbitMQ только для компании из файлов. Для компании из Чекко возвращает 409 без создания задания. Роль пользователя и снимок контекста определяются на сервере. Повтор с тем же заголовком Idempotency-Key возвращает ранее созданное задание.",
         "operationId": "request_preparation_api_account_service_companies__company_id__ai_preparations_post",
         "security": [
           {
@@ -823,7 +878,7 @@
             }
           },
           "409": {
-            "description": "Ключ уже использован для другой компании"
+            "description": "Ключ уже использован для другой компании или аналитика недоступна для компании из Чекко"
           },
           "422": {
             "description": "Ошибка проверки параметров запроса",
@@ -1109,7 +1164,14 @@
             "title": "Источники данных"
           },
           "ml_context": {
-            "$ref": "#/components/schemas/CompanyMLContext"
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CompanyMLContext"
+              },
+              {
+                "type": "null"
+              }
+            ]
           }
         },
         "type": "object",
@@ -1139,15 +1201,14 @@
             "anyOf": [
               {
                 "type": "string",
-                "maxLength": 160,
+                "maxLength": 512,
                 "minLength": 1
               },
               {
                 "type": "null"
               }
             ],
-            "title": "Название",
-            "description": "Синтетическое отображаемое название; null допустим только в исторических событиях до обогащения"
+            "title": "Название"
           },
           "profile_status": {
             "type": "string",
@@ -1187,6 +1248,59 @@
           "role": {
             "$ref": "#/components/schemas/UserRole"
           },
+          "source": {
+            "type": "string",
+            "enum": [
+              "fixture",
+              "checko"
+            ],
+            "title": "Источник компании",
+            "default": "fixture"
+          },
+          "inn": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^(?:[0-9]{10}|[0-9]{12})$"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "ИНН"
+          },
+          "infoCompany": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/InfoCompany"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "financials": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/FinancialInfoCompany"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "checko_fetched_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Время получения данных Чекко"
+          },
           "payments": {
             "$ref": "#/components/schemas/PaymentSummary"
           },
@@ -1216,7 +1330,19 @@
             "title": "Источники данных"
           },
           "ml_context": {
-            "$ref": "#/components/schemas/CompanyMLContext"
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CompanyMLContext"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "ai_preparation_available": {
+            "type": "boolean",
+            "title": "Доступна подготовка аналитики",
+            "readOnly": true
           }
         },
         "type": "object",
@@ -1235,7 +1361,8 @@
           "counterparties_total",
           "data_warnings",
           "sources",
-          "ml_context"
+          "ml_context",
+          "ai_preparation_available"
         ],
         "title": "Подробная карточка компании",
         "description": "Карточка страницы компании с платёжным контекстом."
@@ -1317,15 +1444,14 @@
             "anyOf": [
               {
                 "type": "string",
-                "maxLength": 160,
+                "maxLength": 512,
                 "minLength": 1
               },
               {
                 "type": "null"
               }
             ],
-            "title": "Название",
-            "description": "Синтетическое отображаемое название; null допустим только в исторических событиях до обогащения"
+            "title": "Название"
           },
           "profile_status": {
             "type": "string",
@@ -1364,6 +1490,64 @@
           },
           "role": {
             "$ref": "#/components/schemas/UserRole"
+          },
+          "source": {
+            "type": "string",
+            "enum": [
+              "fixture",
+              "checko"
+            ],
+            "title": "Источник компании",
+            "default": "fixture"
+          },
+          "inn": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^(?:[0-9]{10}|[0-9]{12})$"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "ИНН"
+          },
+          "infoCompany": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/InfoCompany"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "financials": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/FinancialInfoCompany"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "checko_fetched_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Время получения данных Чекко"
+          },
+          "ai_preparation_available": {
+            "type": "boolean",
+            "title": "Доступна подготовка аналитики",
+            "readOnly": true
           }
         },
         "type": "object",
@@ -1376,7 +1560,8 @@
           "conflicting_fields",
           "profile_variants",
           "updated_at",
-          "role"
+          "role",
+          "ai_preparation_available"
         ],
         "title": "Компания и роль пользователя",
         "description": "Общий профиль с ролью конкретного пользователя, не часть общего события."
@@ -1410,6 +1595,29 @@
           },
           "role": {
             "$ref": "#/components/schemas/UserRole"
+          },
+          "source": {
+            "type": "string",
+            "enum": [
+              "fixture",
+              "checko"
+            ],
+            "title": "Источник компании"
+          },
+          "inn": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "ИНН"
+          },
+          "ai_preparation_available": {
+            "type": "boolean",
+            "title": "Доступна подготовка аналитики"
           }
         },
         "type": "object",
@@ -1419,7 +1627,10 @@
           "name",
           "profile_status",
           "profile",
-          "role"
+          "role",
+          "source",
+          "inn",
+          "ai_preparation_available"
         ],
         "title": "Компания в списке"
       },
@@ -2034,6 +2245,29 @@
         ],
         "title": "Страница контрагентов"
       },
+      "CreateCompanyDTO": {
+        "properties": {
+          "inn": {
+            "type": "string",
+            "title": "ИНН",
+            "description": "ИНН для загрузки компании из Чекко; 10 или 12 цифр с контрольными разрядами"
+          },
+          "role": {
+            "$ref": "#/components/schemas/UserRole",
+            "description": "Ваша роль в добавляемой компании"
+          },
+          "business_profile": {
+            "$ref": "#/components/schemas/BusinessProfile"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "inn",
+          "role"
+        ],
+        "title": "Добавление компании по ИНН"
+      },
       "DocumentType": {
         "type": "string",
         "enum": [
@@ -2045,6 +2279,259 @@
         ],
         "title": "Вид отчётности",
         "description": "balance_sheet — бухгалтерский баланс; financial_results — финансовые результаты;\nchanges_in_equity — изменения капитала; cash_flows — движение денежных средств;\ntargeted_funds — целевое использование полученных средств."
+      },
+      "EconomicSectorCompany": {
+        "properties": {
+          "classOkved": {
+            "type": "integer",
+            "title": "Класс ОКВЭД"
+          },
+          "name": {
+            "type": "string",
+            "title": "Название"
+          },
+          "globalSector": {
+            "$ref": "#/components/schemas/EconomicsSectors",
+            "readOnly": true
+          }
+        },
+        "type": "object",
+        "required": [
+          "classOkved",
+          "name",
+          "globalSector"
+        ],
+        "title": "Вид экономической деятельности",
+        "description": "Экономический сектор компании; имена полей сохранены из прежнего API."
+      },
+      "EconomicsSectors": {
+        "type": "string",
+        "enum": [
+          "Сельское, лесное хозяйство, охота, рыболовство и рыбоводство",
+          "Добыча полезных ископаемых",
+          "Обрабатывающие производства",
+          "Электроэнергия, газ, пар и кондиционирование воздуха",
+          "Водоснабжение, водоотведение и обращение с отходами",
+          "Строительство",
+          "Оптовая и розничная торговля; ремонт автотранспортных средств",
+          "Транспортировка и хранение",
+          "Деятельность гостиниц и предприятий общественного питания",
+          "Деятельность в области информации и связи",
+          "Финансовая и страховая деятельность",
+          "Операции с недвижимым имуществом",
+          "Профессиональная, научная и техническая деятельность",
+          "Административная деятельность и сопутствующие услуги",
+          "Государственное управление, обеспечение военной безопасности и социальное обеспечение",
+          "Образование",
+          "Здравоохранение и социальные услуги",
+          "Культура, спорт, досуг и развлечения",
+          "Предоставление прочих видов услуг",
+          "Деятельность домашних хозяйств",
+          "Деятельность экстерриториальных организаций и органов"
+        ],
+        "title": "Отрасль экономической деятельности",
+        "description": "\"Экономический сектор компании."
+      },
+      "FinancialInfoCompany": {
+        "properties": {
+          "year": {
+            "type": "integer",
+            "title": "Отчётный год"
+          },
+          "revenue": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Выручка для расчётов ML"
+          },
+          "net_profit": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Чистая прибыль"
+          },
+          "cost_of_sales": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Себестоимость продаж"
+          },
+          "gross_profit": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Валовая прибыль"
+          },
+          "gross_profit_margin": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Валовая рентабельность, %"
+          },
+          "commercial_expenses": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Коммерческие расходы"
+          },
+          "administrative_expenses": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Управленческие расходы"
+          },
+          "operating_expenses": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Операционные расходы"
+          },
+          "net_profit_margin": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Чистая рентабельность, %"
+          },
+          "operating_cash_flow": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Денежный поток от текущих операций"
+          },
+          "current_ratio": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Коэффициент текущей ликвидности"
+          },
+          "payroll_payments": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Выплаты персоналу"
+          },
+          "payroll_payment_share": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Доля выплат персоналу в выручке, %"
+          },
+          "revenue_per_employee": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Выручка на сотрудника"
+          },
+          "sales_expense_ratio": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Доля коммерческих расходов в выручке, %"
+          },
+          "cac": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Стоимость привлечения клиента"
+          },
+          "ltv": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Доход от клиента за период взаимодействия"
+          }
+        },
+        "type": "object",
+        "required": [
+          "year"
+        ],
+        "title": "Финансовые показатели Чекко",
+        "description": "Финансовая информация о компании."
       },
       "HTTPValidationError": {
         "properties": {
@@ -2058,6 +2545,80 @@
         },
         "type": "object",
         "title": "Ошибка проверки запроса"
+      },
+      "InfoCompany": {
+        "properties": {
+          "ogrn": {
+            "type": "string",
+            "minLength": 1,
+            "title": "ОГРН"
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 512,
+            "minLength": 1,
+            "title": "Название"
+          },
+          "full_name": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Полное наименование"
+          },
+          "registered_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Дата регистрации"
+          },
+          "city": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Город"
+          },
+          "economicSectorCompany": {
+            "items": {
+              "$ref": "#/components/schemas/EconomicSectorCompany"
+            },
+            "type": "array",
+            "title": "Дополнительные виды деятельности"
+          },
+          "primaryEconomicSectorCompany": {
+            "$ref": "#/components/schemas/EconomicSectorCompany"
+          },
+          "employee_count": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Численность работников"
+          }
+        },
+        "type": "object",
+        "required": [
+          "ogrn",
+          "name",
+          "full_name",
+          "economicSectorCompany",
+          "primaryEconomicSectorCompany"
+        ],
+        "title": "Реквизиты компании из Чекко",
+        "description": "Дополнительная информация о компании, которая контролируется государством."
       },
       "KeyVulnerability": {
         "type": "string",

@@ -4,9 +4,9 @@
   "repositories": [
     {
       "repository": "Account-Service",
-      "revision": "71315241bbf9b28ffdc15f0ca33ca04de7b3d0c3",
+      "revision": "9e14c05f6bf2a4d82285fa73721d23fbdc5303a2",
       "status": "production",
-      "url": "https://github.com/Alfa-future-hack-okoAI/Account-Service/tree/71315241bbf9b28ffdc15f0ca33ca04de7b3d0c3"
+      "url": "https://github.com/Alfa-future-hack-okoAI/Account-Service/tree/9e14c05f6bf2a4d82285fa73721d23fbdc5303a2"
     },
     {
       "repository": "Business-Impact-Service",
@@ -28,9 +28,9 @@
     },
     {
       "repository": "Deployment",
-      "revision": "b7bd515c3c68684c8c03c6a0b1aa0687a81d3cbc",
+      "revision": "f4961662f7291aad75aba76e145d9aa68c2f4e46",
       "status": "production",
-      "url": "https://github.com/Alfa-future-hack-okoAI/Deployment/tree/b7bd515c3c68684c8c03c6a0b1aa0687a81d3cbc"
+      "url": "https://github.com/Alfa-future-hack-okoAI/Deployment/tree/f4961662f7291aad75aba76e145d9aa68c2f4e46"
     },
     {
       "repository": "API-Gateway",

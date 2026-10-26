@@ -98,6 +98,12 @@ Deployment `scripts/configure_ml.py`, который сохраняет суще
 отсутствие JWT при чтении ленты даёт 401, чужая компания — 403.
 ML остался на прежнем digest dev-логики.
 
+Релиз Account `9e14c05`, Deployment `f496166` добавляет компании по ИНН из
+Чекко. Проверены POST `201`, подробный GET `200`, повтор ИНН `409`,
+некорректный ИНН `422` и запрет AI `409`. Исходный каталог, пользователи и
+платежи сохранены; до миграции создана закрытая резервная копия БД на сервере.
+Ключ Чекко задан только в runtime env Account.
+
 ## Сбой и возврат версии
 
 current меняется после успешной выкладки. Если deploy упал, часть процессов
@@ -108,4 +114,4 @@ current меняется после успешной выкладки. Если 
 Go Gateway/Insight пока не имеют интеграции с этим пайплайном Deployment.
 Сценарий product/up.sh описан отдельно в [окружениях](environments.md).
 
-Каноническая инструкция и scripts: [Deployment](https://github.com/Alfa-future-hack-okoAI/Deployment/tree/b7bd515c3c68684c8c03c6a0b1aa0687a81d3cbc).
+Каноническая инструкция и scripts: [Deployment](https://github.com/Alfa-future-hack-okoAI/Deployment/tree/f4961662f7291aad75aba76e145d9aa68c2f4e46).

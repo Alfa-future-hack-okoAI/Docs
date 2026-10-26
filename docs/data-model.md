@@ -9,7 +9,8 @@ Keycloak отдельные. ML использует SQLite, Insight — соб�
 | Таблица / хранилище | Содержимое |
 |---|---|
 | users | UUID, F_*, телефон, имя, демопрофиль; пароля нет |
-| companies | UUID, U_*, профиль, бизнес-профиль, конфликты и варианты |
+| companies | UUID, source fixture/checko, U_*/CHECKO_*, профиль и бизнес-профиль |
+| checko_companies | company_id, user_id, ИНН, типизированные снимки реквизитов/финансов JSONB, fetched_at |
 | user_companies | Доступ user↔company и роль в этой компании |
 | payment_flows | Направление payer→beneficiary, сумма, число платежей, исходная строка |
 | company_documents | Компания, тип, год, пользователь, метаданные и object_key PDF |
@@ -21,6 +22,8 @@ Keycloak отдельные. ML использует SQLite, Insight — соб�
 erDiagram
     users ||--o{ user_companies : access
     companies ||--o{ user_companies : membership
+    companies ||--o| checko_companies : provider_snapshot
+    users ||--o{ checko_companies : added_by
     companies ||--o{ payment_flows : payer_or_beneficiary
     companies ||--o{ company_documents : documents
     companies ||--o{ ai_preparations : analyses
@@ -31,6 +34,12 @@ erDiagram
 источника не удаляются по совпавшей сумме. Связь user_companies определяет доступ;
 роль в глобальном профиле пользователя не заменяет роль в выбранной компании.
 Пароль Keycloak не дублируется в users.
+
+Миграция Чекко задаёт `source=fixture` всем существующим компаниям. Новые
+снимки отделены от исходных записей, уникальна пара `(user_id, inn)`.
+Синтетические имена уникальны только внутри fixture-каталога; реальные названия
+могут повторяться. Миграция не удаляет связи, платежи или задания, а её откат
+запрещён при сохранённых компаниях Чекко.
 
 ## News
 
